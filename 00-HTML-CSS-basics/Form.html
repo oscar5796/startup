@@ -1,0 +1,98 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <script type="text/javascript"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        
+
+
+        <!-- Sign up form -->
+        <form name ="SignUpForm" class="SignUpForm" method="get" action="">
+        <p>Sign up</p>
+
+        <table>
+            <!-- First name-->
+            <tr>
+                <td><label for="First name"><span>First name</span></label></td>
+                <td><input title = "Write your first name"type="text" id="First_name" required></td>
+            </tr>
+            <!-- Last name-->
+            <tr>
+                <td><label for="Last name"><span>Last name</span></label></td>
+                <td><input title="Write your last name" type="text"  id="Last_name" required></td>
+            </tr>
+            <!-- Email-->
+            <tr>
+                <td><label for="Email"><span>Email</span></label></td>
+                <td><input title = "Write your email"type="email"  id="Email" name = "email" required></td>
+            </tr>
+            <!-- Birthday-->
+            <tr>
+                <td><label for="Birthday"><span>Birthday</span></label></td>
+                <td><input type="date" id="Birthday"></td>
+            </tr>
+            <!--Favourite sport-->
+            <tr>
+                <td><label for="Favourite sport"><span>Favourite sport</span></label></td>
+                <td>
+                    <input type="text" list="sports" … >
+                        <datalist id="sports">
+                            <option  value="Basketball">
+                            <option  value="Football">
+                            <option  value="Tennis">    
+                        </datalist>
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2"><label for="Bio"><span>bio</span></label></th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label for="TextBio"><span><textarea cols = "38" rows = "3" name="bio">Write here your bio</textarea></span></label>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td><label><input type="submit" value="Sign up">
+                <td>
+                    <label>
+                        <input type="reset" value = "Clear form">
+                    </label>
+                </td>
+            </tr>
+        </table>
+        
+        
+        </form>
+
+        <script src="https://code.jquery.com/jquery-{{JQUERY_VERSION}}.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+        <script>
+            window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+            ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+        </script>
+        <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+    </body>
+</html>
