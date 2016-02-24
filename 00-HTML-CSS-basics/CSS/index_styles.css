@@ -73,3 +73,7 @@ article
 *[class $= "r" ]{
 	background-color: #FF00FF;
 } 
+*[class *= "a" ]:not(*[class $= "r"])
+{
+	background-color: blue;
+}
