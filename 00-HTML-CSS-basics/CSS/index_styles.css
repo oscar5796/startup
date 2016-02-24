@@ -8,12 +8,14 @@ html
 
 header 
 {
+	margin-top: 10px;
 	text-align: center;
 	background-color: gray;
 
 }
 aside 
 {
+	margin-right: 10 px;
 	background-color: red; 
 }
 nav
