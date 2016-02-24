@@ -19,7 +19,7 @@ div
 	border-radius: 20px;
 	font-size: 46px;
 }
-.content > .header
+section > header
 {
 	background-color: gray;
 	text-align: center;
@@ -70,3 +70,6 @@ article
 	margin: 1em;
 	height: 30%;
 }
+*[class $= "r" ]{
+	background-color: #FF00FF;
+} 
