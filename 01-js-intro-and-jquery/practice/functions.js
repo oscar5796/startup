@@ -1,3 +1,14 @@
 $(document).on('ready', function () {
-	 $('.hello').addClass('fadeIn');
+	
+	var fade = function(){
+		$('.hello').addClass('fadeIn');
+	}
+
+	var dfd = $.Deferred();
+
+	dfd.done(setTimeout(function () {
+		$('.Alias').focus();
+	}, 3000));
+	dfd.resolve(fade()); 
+		 
 });
