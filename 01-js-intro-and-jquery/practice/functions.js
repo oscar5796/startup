@@ -10,5 +10,10 @@ $(document).on('ready', function () {
 		$('.Alias').focus();
 	}, 3000));
 	dfd.resolve(fade()); 
+
+	$('.button').click(function() {
+		window.location.href = 'http://bootcamp.aws.af.cm/welcome/yourname';
+	});
 		 
 });
+
