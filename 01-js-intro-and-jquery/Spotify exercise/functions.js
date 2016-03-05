@@ -31,7 +31,6 @@ function compileTemplate(template, urlAlb, nameAlb, typeAlb, imageAlb){
 	compiled 		= compiled.replace(/typeAlb/g, typeAlb);
 	compiled 		= compiled.replace(/imageAlb/g, imageAlb);
 
-	console.log(compiled);
 
 	return compiled;
 };
