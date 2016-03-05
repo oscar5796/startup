@@ -1,50 +1,65 @@
-$(document).on('ready', function(){
-	var xhttp = new XMLHttpRequest();
-	$('.searchButton').on('click', function(){
-		
-		document.getElementById('infAlb').innerHTML = " ";
-		xhttp.onreadystatechange = function () {
-			if (xhttp.readyState == 4 && xhttp.status == 200) {
-				
-				showConsoleResponse(xhttp.response);
-			}
+function spotifyRequest (){
 
+	document.getElementById('infAlb').innerHTML = " ";
+
+	artist = document.getElementById('artist').value;
+	artist = artist.replace(/\s/gi,"+");
+
+	var xhttp = new XMLHttpRequest(); 
+	
+	xhttp.onreadystatechange = function () {
+		if (xhttp.readyState == 4 && xhttp.status == 200) {			
+			getInfo(xhttp.response);
+			}
 		};
 
-		
-		var artist = document.getElementById("artist").value; 
-		
-		
-		var artistWOSpace = artist.replace(/\s/gi,"+");
+	xhttp.open("GET", "https://api.spotify.com/v1/search/?q="+artist+"&type=album", true);
+	xhttp.send(); 	
 
-		xhttp.open("GET", "https://api.spotify.com/v1/search/?q="+artistWOSpace+"&type=album", true);
-		xhttp.send(); 
+};
 
-		
-	});
+function getInfo(xhttpResponse){
+	var Jresult = JSON.parse(xhttpResponse);
+	var allResult = Jresult.albums.items;
 
-	function showConsoleResponse(result){
-		var Jresult = JSON.parse(result);
-		
-		var items = Jresult.albums.items;
-		
-		var showImages = document.getElementById('infAlb');
+	generateHtmlAdds(allResult);
+};
+function compileTemplate(template, urlAlb, nameAlb, typeAlb, imageAlb){
+
+	var compiled 	= template.replace(/urlAlb/g, urlAlb);
+	compiled 		= compiled.replace(/nameAlb/g, nameAlb);
+	compiled 		= compiled.replace(/typeAlb/g, typeAlb);
+	compiled 		= compiled.replace(/imageAlb/g, imageAlb);
+
+	console.log(compiled);
+
+	return compiled;
+};
+
+function generateHtmlAdds(jsonResponse){
+
+	var allAdd = "";
+	var template = "<div class = 'disc'><a href='urlAlb' target = '_blank' title = ''><span class='screen'><p class = 'title'><br><br>Name: 'nameAlb'<br><br><br>Album: 'typeAlb' </p></span><img src='imageAlb' ></a></div>"
+	var contShow = document.getElementById('infAlb');
+	
+
+	for(var i = 0; i < jsonResponse.length; i++){
+
+		var urlAlb 		=	jsonResponse[i].external_urls.spotify;
+		var nameAlb 	=	jsonResponse[i].name;
+		var imageAlb 	=	jsonResponse[i].images[1].url;
+		var typeAlb 	=	jsonResponse[i].album_type;		
 
 
-		for(var i = 0; i < items.length; i++){
-		
+	allAdd += compileTemplate( template, urlAlb, nameAlb, typeAlb, imageAlb );
 
-			var url_alb = items[i].external_urls.spotify+" ";
-			var image_alb = items[i].images[1].url;
-			var name_alb = items[i].name;
-			var type_alb = items[i].album_type;
-
-
-	    	var add = "<div class = 'disc'><a href='"+url_alb+"' target = '_blank' title = ''><span class='screen'><p class = 'title'><br><br>Name: "+name_alb+"<br><br><br>Album: "+type_alb+" </p></span><img src='"+image_alb+"' ></a></div>";
-			showImages.innerHTML += add;
-			
-		}
-		
 	}
+	contShow.innerHTML += allAdd;
 
+};
+
+$(document).on('ready',function(){
+	$('.searchButton').on('click',function(){
+		spotifyRequest();
+	});
 });
