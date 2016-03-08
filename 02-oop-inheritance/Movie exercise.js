@@ -3,23 +3,50 @@ function Movie(){
 		movieName: "",
 		mainCharacter: "" 
 	};
-	this.statechange = false; 
+	this.eventNames = {
+		ONPLAY: "onplay",
+		ONSTOP: "onstop"
+	}; 
+	this.events = {
+
+	};
+	
 }
 
 Movie.prototype = {
 
 	constructor:Movie, 
 
+
+	addEventListener: function(name, callback){
+		if(!this.events[name]){
+			this.events[name] = []; 
+		}
+		this.events[name].push(callback);
+
+	},
+
+	dispatchEvent:function(eventName){
+		var event = this.events[eventName]; 
+		if(!event){
+			console.log("Event doesn´t exist"); 
+			return; 
+		}
+		for (var i = 0; i < event.length; i++) {
+			event[i]();
+		};
+		
+	},
+
 	play:function(){
 
 		console.log("Playing "+this.get("movieName")+" ...");
-		this.statechange = true;
-
+		this.dispatchEvent(this.eventNames.ONPLAY);
 	},
 
 	stop:function(){
 		console.log("Stopped "+this.get("movieName")+" ...");
-		this.statechange = false; 
+		this.dispatchEvent(this.eventNames.ONSTOP);
 	},
 
 	set:function(property, value){
@@ -34,23 +61,20 @@ Movie.prototype = {
 		
 		return this.properties.property; 
 	}
-}
+};
 
-function MovieObserver(Movie){
 
-	if(Movie.statechange == true){
-		console.log(Movie.get("movieName")+" is playing"); 
-	}
-	else if (Movie.statechange == false){
-		console.log(Movie.get("movieName")+" is stopped");
-	}
 
-}
 
-Terminator = new Movie();
-Terminator.set("movieName", "Terminator");
-console.log(Terminator.get("name"));
-Terminator.play(); 
-MovieObserver(Terminator);
-Terminator.stop();
-MovieObserver(Terminator); 
+
+terminator = new Movie();
+terminator.set("movieName", "Terminator");
+console.log(terminator.get("name"));
+terminator.addEventListener("onplay", function(){
+	console.log("test1");
+});
+terminator.addEventListener("onstop", function(){
+	console.log("Hizo stop"); 
+})
+terminator.play();
+terminator.stop();
